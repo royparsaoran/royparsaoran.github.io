@@ -1,0 +1,31 @@
+<hr class="footer accent"/>
+
+<!-- Footer -->
+<footer role="footer" class="container">
+  {{#isnt omitFooterConnectSection 'true'}}
+    {{#isnt settings.PORTFOLIO_FOOTER_NAV_OMIT 'true'}}
+      <nav role="footer">
+        <ul>
+          <li><a class="home" href="{{pathToRoot}}/" ng-href="#!/" util-change-path="/" ><i class="fa fa-home fa-lg"></i>Home</a></li>
+          {{#is settings.PORTFOLIO_WORK_SHOW 'true'}}
+            <li><a href="{{pathToRoot}}/#work" util-change-path="/work" ><i class="fa fa-flask fa-lg"></i>Work</a></li>
+          {{/is}}
+          {{#is settings.PORTFOLIO_ABOUT_SHOW 'true'}}
+            <li><a href="{{pathToRoot}}/#about" util-change-path="/about" ><i class="fa fa-male fa-lg"></i>About</a></li>
+          {{/is}}
+          <li><a href="{{settings.BLOG_URL}}"><i class="fa fa-comment fa-lg"></i>Blog</a></li>
+        </ul>
+
+      </nav>
+    {{/isnt}}
+    <h3>Connect</h3>
+
+    {{>social_media}}
+  {{/isnt}}
+  <div class="content-section">
+      <div class="content">
+		    <p>&copy; 2013-2017 {{settings.PORTFOLIO_SITE_OWNER}} &amp; respective parties.</p>
+      </div>
+	</div>
+</footer>
+<!-- /Footer -->

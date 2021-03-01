@@ -1,0 +1,94 @@
+{{#contains absolute "/blog/"}}
+  {{#isnt basename "index"}}
+
+    <!-- FB -->
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '{{settings.FB_APP_ID}}',
+          status     : true,
+          xfbml      : true
+        });
+
+        //buttons have rendered
+        FB.Event.subscribe('xfbml.render', function(response) {
+
+          // load conflicting G+ code
+          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+          po.id = "googleplussdk";
+          po.src = 'https://apis.google.com/js/platform.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement(s); js.id = id;
+        js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{settings.FB_APP_ID}}";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- /FB -->
+
+    <!-- TWITTER -->
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+    <!-- LINKEDIN -->
+    <!--<script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>-->
+
+
+
+    {{#if production}}
+      <!-- DISQUS TAGS -->
+      <script type="text/javascript">
+
+        var disqus_shortname = {{#if production}} '{{settings.DISQUS_SHORTNAME}}' {{else}} '{{settings.DISQUS_SHORTNAME_DEV}}'{{/if}};
+        var disqus_identifier = '{{#if page_id}}{{page_id}}{{else}}{{basename}}{{/if}}';
+        var disqus_title = '{{title}}';
+        var disqus_url = '{{settings.BLOG_BASE_URL}}{{basename}}/'; //a unique URL for each page where Disqus is present';
+        //var disqus_developer = 1;
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    {{/if}}
+  {{/isnt}}
+{{/contains}}
+
+
+{{#if production}}
+
+{{else}}
+
+  <!-- weinre -->
+  <script type="text/javascript">
+    (function () {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+              '://local.weinre.com:8081/target/target-script-min.js#jfmk';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      //s.parentNode.insertBefore(wf, s);
+    })(); </script>
+
+
+  <!-- livereload script -->
+  <script type="text/javascript">
+    var ua = navigator.userAgent.toLowerCase();
+    var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+    if (!isAndroid) {
+      document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1" type="text/javascript"><\/script>')
+    }
+  </script>
+
+{{/if}}

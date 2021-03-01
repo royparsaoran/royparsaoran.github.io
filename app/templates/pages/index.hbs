@@ -1,0 +1,17 @@
+---
+title: <%= settings.PORTFOLIO_SITE_TITLE %>
+layout: app/templates/layouts/default.hbs
+pathToRoot: '.'
+activeTab: ''
+omitFooterConnectSection: <%= settings.PORTFOLIO_FOOTER_CONNECT_OMIT %>
+---
+<main role="main">
+    {{>intro}}
+    {{#is settings.PORTFOLIO_WORK_SHOW 'true'}}
+      {{>work }}
+    {{/is}}
+    {{#is settings.PORTFOLIO_ABOUT_SHOW 'true'}}
+      {{>about}}
+     {{/is}}
+    {{! >contact}}
+</main>
